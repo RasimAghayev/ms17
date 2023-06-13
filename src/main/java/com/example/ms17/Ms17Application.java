@@ -10,8 +10,6 @@ public class Ms17Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Ms17Application.class, args);
-
-
 		log.info("Application is starting!");
 	}
 
