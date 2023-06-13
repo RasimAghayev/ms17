@@ -12,7 +12,7 @@ public class Ms17Application {
 		SpringApplication.run(Ms17Application.class, args);
 		log.info("Application is starting!");
 
-		log.error("dfdf");
+		log.warn("Sdfdf");
 	}
 
 }
