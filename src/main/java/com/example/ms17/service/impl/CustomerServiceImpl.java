@@ -31,4 +31,24 @@ public class CustomerServiceImpl implements CustomerService {
         return null;
     }
 
+    @Override
+    public Customer deleteById(long id) {
+        Optional<Customer>  ifExits=customerRepository.findById(id);
+//        if (!ifExits.isEmpty()) customerRepository.delete(ifExits.get());
+//        if (ifExits.isPresent()) customerRepository.delete(ifExits.get());
+        ifExits.ifPresent(customerRepository::delete)
+        return ifExits.get();
+    }
+
+    @Override
+    public Customer edit(long id, Customer customer){
+
+        Optional<Customer>  ifExits=customerRepository.findById(id);
+        if (ifExits.isPresent()) {
+            ifExits.get().setName(student.getName());
+            customerRepository.save(ifExits.get());
+//            customerRepository.save(customer);
+        }
+        return ifExits.get();
+    }
 }

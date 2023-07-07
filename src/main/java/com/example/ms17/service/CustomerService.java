@@ -8,7 +8,14 @@ public interface CustomerService {
     Customer save(Customer customer);
 
     Customer findById(long id);
-    
+
     List<Customer> findByAll();
+
+    Customer deleteById(long id);
+
+    Customer deleteByEntity(Customer customer);
+
+    Custmer edit(long id, Customer customer);
+
 
 }
