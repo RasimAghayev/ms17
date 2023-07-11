@@ -1,11 +1,7 @@
 package com.example.ms17.controller;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.Param;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.ms17.model.Customer;
 import com.example.ms17.service.CustomerService;
@@ -24,18 +20,18 @@ public class CustomerController {
         return customerService.save(customer);
     }
 
-    @PostMapping("/id/{id}")
+    @GetMapping("/id/{id}")
     public Customer findById(@PathVariable long id){
         return customerService.findById(id);
     }
 
-    @GetMapping("/delete)
+    @GetMapping("/delete")
     public Customer deleteById(@Param("id") long id){
         return customerService.deleteById(id);
     }
 
-    @PutMapping("/edit/id/{id})
+    @PutMapping("/edit/id/{id}")
     public Customer edit(@RequestBody Customer customer,@PathVariable long id){
-        return customerService.edit(id);
+        return customerService.edit(id, customer);
     }
 }

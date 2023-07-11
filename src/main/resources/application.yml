@@ -6,3 +6,6 @@ spring:
             - db
             - security
             - logging
+#server:
+#  servlet:
+#    context-path: api/v1/ms17-svc/
