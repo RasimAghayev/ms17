@@ -25,4 +25,8 @@ public class CalculatorImpl implements Calculator {
     public double multiple(double a, double b) {
         return a*b;
     }
+    @Override
+    public boolean isOdd(int num) {
+        return num%2!=0;
+    }
 }

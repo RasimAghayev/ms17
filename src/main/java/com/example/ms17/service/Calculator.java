@@ -5,5 +5,6 @@ public interface Calculator {
     double sub(double a, double b);
     double divide(double a, double b);
     double multiple(double a, double b);
+    boolean isOdd(int num);
 
 }

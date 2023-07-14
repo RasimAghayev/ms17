@@ -4,7 +4,10 @@ import jdk.jfr.Description;
 import org.assertj.core.api.AbstractThrowableAssert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -70,5 +73,12 @@ class CalculatorImplTest {
     void givenAAndBThenMultipleNotSuccess() {
         double sum=calculator.multiple(10,10);
         assertThat(sum).isNotEqualTo(10.0);
+    }
+
+    @ParameterizedTest
+    @DisplayName("IsOdd num list check")
+    @ValueSource(ints={1,5,3,-3,15, Integer.MAX_VALUE})
+    void givenNumbersThenIsOddThenSuccess(int number){
+        assertThat(calculator.isOdd(number)).isTrue();
     }
 }
