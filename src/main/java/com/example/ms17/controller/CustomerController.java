@@ -1,13 +1,14 @@
 package com.example.ms17.controller;
 
-//import org.springframework.data.repository.query.Param;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.ms17.model.Customer;
 import com.example.ms17.service.CustomerService;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.Collections;
+import java.util.List;
 
 
 @RestController
@@ -16,23 +17,27 @@ import lombok.RequiredArgsConstructor;
 public class CustomerController {
     private final CustomerService customerService;
 
-    @PostMapping("/save")
+    @PostMapping("")
     public Customer save(@RequestBody Customer customer){
         return customerService.save(customer);
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("")
+    public List<Customer> findAll(){
+        return customerService.findAll();
+    }
+    @GetMapping("/{id}")
     public Customer findById(@PathVariable long id){
         return customerService.findById(id);
     }
 
-    @GetMapping("/delete")
-    public Customer deleteById(@Param("id") long id){
-        return customerService.deleteById(id);
+    @PutMapping("/{id}")
+    public Customer edit(@PathVariable long id,@RequestBody Customer customer){
+        return customerService.edit(id, customer);
     }
 
-    @PutMapping("/edit/id/{id}")
-    public Customer edit(@RequestBody Customer customer,@PathVariable long id){
-        return customerService.edit(id, customer);
+    @DeleteMapping("/{id}")
+    public Customer deleteById(@PathVariable long id){
+        return customerService.deleteById(id);
     }
 }

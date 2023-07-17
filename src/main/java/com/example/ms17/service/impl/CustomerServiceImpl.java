@@ -21,25 +21,16 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer save(Customer customer){
         return customerRepository.save(customer);
     };
+    @Override
+    public List<Customer> findAll(){
+        return (List<Customer>) customerRepository.findAll();
+    }
 
     @Override
     public Customer findById(long id){
         return customerRepository.findById(id).get();
     };
-    
-    @Override
-    public List<Customer> findByAll(){
-        return null;
-    }
 
-    @Override
-    public Customer deleteById(long id) {
-        Optional<Customer> ifExits=customerRepository.findById(id);
-//        if (!ifExits.isEmpty()) customerRepository.delete(ifExits.get());
-//        if (ifExits.isPresent()) customerRepository.delete(ifExits.get());
-        ifExits.ifPresent(customerRepository::delete);
-        return ifExits.get();
-    }
 
     @Override
     public Customer edit(long id, Customer customer){
@@ -50,6 +41,15 @@ public class CustomerServiceImpl implements CustomerService {
             customerRepository.save(ifExits.get());
 //            customerRepository.save(customer);
         }
+        return ifExits.get();
+    }
+
+    @Override
+    public Customer deleteById(long id) {
+        Optional<Customer> ifExits=customerRepository.findById(id);
+//        if (!ifExits.isEmpty()) customerRepository.delete(ifExits.get());
+        if (ifExits.isPresent()) customerRepository.delete(ifExits.get());
+//        ifExits.ifPresent(customerRepository::delete);
         return ifExits.get();
     }
 }
