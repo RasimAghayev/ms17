@@ -1,4 +1,7 @@
 spring:
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassName: com.mysql.cj.
     jpa:
         hibernate:
             ddl-auto: update
