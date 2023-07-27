@@ -77,9 +77,11 @@ dependencies {
 //	implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.5.Final'
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 	compileOnly 'org.projectlombok:lombok'
+
 	//Database
 	runtimeOnly 'com.mysql:mysql-connect-j'
 //	runtimeOnly 'com.h2database:h2'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
