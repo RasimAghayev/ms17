@@ -27,8 +27,8 @@ public class CustomerController {
         return customerService.findAll();
     }
     @GetMapping("/{id}")
-    public Customer findById(@PathVariable long id){
-        return customerService.findById(id);
+    public ResponseEntity<CustomerDto> findById(@PathVariable long id){
+        return ResponseEntity.ok(customerService.findById(id));
     }
 
     @PutMapping("/{id}")

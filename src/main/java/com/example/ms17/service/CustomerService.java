@@ -1,5 +1,6 @@
 package com.example.ms17.service;
 
+import com.example.ms17.dto.CustomerDto;
 import com.example.ms17.model.Customer;
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface CustomerService {
 
     List<Customer> findAll();
 
-    Customer findById(long id);
+    CustomerDto findById(long id);
 
 
     Customer deleteById(long id);

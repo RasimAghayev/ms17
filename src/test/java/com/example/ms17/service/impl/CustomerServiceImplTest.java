@@ -26,6 +26,9 @@ class CustomerServiceImplTest {
     @Mock
     private CustomerRepository customerRepository;
 
+    @Mock
+    private ModelMapper modelMapper; 
+
     @InjectMocks
     private CustomerServiceImpl customerService;
     private Customer customer;

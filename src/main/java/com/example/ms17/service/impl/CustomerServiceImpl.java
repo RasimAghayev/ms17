@@ -1,6 +1,7 @@
 package com.example.ms17.service.impl;
 
 import com.example.ms17.model.Customer;
+import com.example.ms17.dto.CustomerDto;
 import com.example.ms17.repository.CustomerRepository;
 import com.example.ms17.service.CustomerService;
 
@@ -27,8 +28,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer findById(long id){
-        return customerRepository.findById(id).get();
+    public CustomerDto findById(long id){
+        // return customerRepository.findById(id).get();
+        return customerRepository.findById(id)
+        .map(customer -> modelMapper.map(customer, CustomerDto.class))
+        .orElseThrow(() -> new CustomerNotFound(id));
     };
 
 
