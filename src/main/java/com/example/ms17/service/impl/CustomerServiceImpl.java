@@ -1,5 +1,7 @@
 package com.example.ms17.service.impl;
 
+import com.example.ms17.exception.CustomerNotFound;
+import com.example.ms17.mapper.CustomerMapper;
 import com.example.ms17.model.Customer;
 import com.example.ms17.dto.CustomerDto;
 import com.example.ms17.repository.CustomerRepository;
@@ -10,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,10 +20,13 @@ import org.springframework.stereotype.Service;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
-    
+    private final ModelMapper modelMapper;
+    private final CustomerMapper customerMapper;
+
     @Override
-    public Customer save(Customer customer){
-        return customerRepository.save(customer);
+    public CustomerDto save(CustomerDto customerDto){
+        Customer customer= customerMapper.INSTANCE.customerDtoToCustomer(customerDto);
+        return customerMapper.INSTANCE.customerToCustomerDTO(customerRepository.save(customer)) ;
     };
     @Override
     public List<Customer> findAll(){

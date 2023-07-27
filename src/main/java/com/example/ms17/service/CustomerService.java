@@ -8,6 +8,8 @@ public interface CustomerService {
 
     Customer save(Customer customer);
 
+    CustomerDto save(CustomerDto customerDto);
+
     List<Customer> findAll();
 
     CustomerDto findById(long id);

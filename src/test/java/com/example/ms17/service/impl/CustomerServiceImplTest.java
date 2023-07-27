@@ -1,5 +1,7 @@
 package com.example.ms17.service.impl;
 
+import com.example.ms17.dto.CustomerDto;
+import com.example.ms17.exception.CustomerNotFound;
 import com.example.ms17.model.Customer;
 import com.example.ms17.repository.CustomerRepository;
 import org.junit.Before;
@@ -11,12 +13,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
@@ -27,11 +31,12 @@ class CustomerServiceImplTest {
     private CustomerRepository customerRepository;
 
     @Mock
-    private ModelMapper modelMapper; 
+    private ModelMapper modelMapper;
 
     @InjectMocks
     private CustomerServiceImpl customerService;
     private Customer customer;
+    private CustomerDto customerDto;
     private final List<Customer> customers = new ArrayList<>();
 
     @BeforeEach
@@ -108,15 +113,37 @@ class CustomerServiceImplTest {
     void givenCustomerIdThenFindCustomerThenOk() {
         //Arrange - mocking
         when(customerRepository.findById(anyLong())).thenReturn(Optional.of(customer));
+        when(modelMapper.map(customer,CustomerDto.class)).thenReturn(customerDto);
 
         //Act - call real service
-        Customer customerRes=customerService.findById(1l);
+        CustomerDto customerRes=customerService.findById(1L);
 
         //Assert- compare
         assertThat(customerRes.getName()).isEqualTo("Rasim");
 
         //Verification
         verify(customerRepository,times(1)).findById(anyLong());
+        verify(modelMapper,times(1)).map(any(),any());
+    }
+    @Test
+    @DisplayName("Get Customers by ID Not Found")
+    void givenCustomerIdThenFindCustomerThenNotFound() {
+        //Arrange - mocking
+        when(customerRepository.findById(anyLong())).thenReturn(Optional.empty());
+//        when(modelMapper.map(customer,CustomerDto.class)).thenReturn(customerDto);
+
+        //Act - call real service
+//        CustomerDto customerRes=customerService.findById(1L);
+
+        assertThatThrownBy(()->customerService.findById(1L))
+                .isInstanceOf(CustomerNotFound.class)
+                        .hasMessage("Customer 1 does not exist.");
+        //Assert- compare
+//        assertThat(customerRes.getName()).isEqualTo("Rasim");
+
+        //Verification
+        verify(customerRepository,times(1)).findById(anyLong());
+//        verify(modelMapper,times(1)).map(any(),any());
     }
 
 

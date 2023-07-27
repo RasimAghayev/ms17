@@ -1,5 +1,6 @@
 package com.example.ms17.controller;
 
+import com.example.ms17.dto.CustomerDto;
 import com.example.ms17.model.Customer;
 import com.example.ms17.service.CustomerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,6 +8,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,13 +39,17 @@ class CustomerControllerTest {
 
     @MockBean
     private CustomerService customerService;
-    private Customer customer;
+
+    @MockBean
+    private ModelMapper modelMapper;
+//    private Customer customer;
+    private CustomerDto customerDto;
     private final List<Customer> customers = new ArrayList<>();
     private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
-        customer= Customer
+        customerDto= CustomerDto
                 .builder()
                 .name("Rasim")
                 .surname("Aghayev")
@@ -86,7 +93,7 @@ class CustomerControllerTest {
 //        when(customerService.save(customer)).thenReturn(customer);
 
         String expectedJson = new ObjectMapper()
-                .writeValueAsString(customer);
+                .writeValueAsString(customerDto);
 
         //Act - call real service
         mockMvc.perform(
@@ -113,7 +120,7 @@ class CustomerControllerTest {
     @DisplayName("Get Customers by ID")
     void givenIdThenFindCustomerThenOk() throws Exception {
         //Arrange - mocking
-        when(customerService.findById(anyLong())).thenReturn(customer);
+        when(customerService.findById(anyLong())).thenReturn(customerDto);
 
         //Act - call real service
        mockMvc.perform(
