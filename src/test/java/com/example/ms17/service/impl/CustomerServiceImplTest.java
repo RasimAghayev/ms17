@@ -4,7 +4,6 @@ import com.example.ms17.dto.CustomerDto;
 import com.example.ms17.exception.CustomerNotFound;
 import com.example.ms17.model.Customer;
 import com.example.ms17.repository.CustomerRepository;
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -37,7 +36,7 @@ class CustomerServiceImplTest {
     private CustomerServiceImpl customerService;
     private Customer customer;
     private CustomerDto customerDto;
-    private final List<Customer> customers = new ArrayList<>();
+    private List<Customer> customers = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
@@ -68,21 +67,24 @@ class CustomerServiceImplTest {
 
     @AfterEach
     void tearDown() {
-        customer=null;
+        customerDto=null;
+        Customer customer1=null;
+        Customer customer2=null;
+        customers=null;
     }
 
     @Test
     @DisplayName("Save Customers")
     void givenCustomerThenSaveThenOk() {
         //Arrange - mocking
-        when(customerRepository.save(any())).thenReturn(customer);
+        when(customerRepository.save(any())).thenReturn(customerDto);
 
         //Act - call real service
-        Customer saveCustomerRes=customerService.save(customer);
+        CustomerDto saveCustomerRes=customerService.save(customerDto);
 
         //Assert- compare
-        assertThat(saveCustomerRes.getName()).isEqualTo("Rasim");
-        assertThat(saveCustomerRes.getName()).isNotEmpty();
+        assertThat(saveCustomerRes.getCustomerName()).isEqualTo("Rasim");
+        assertThat(saveCustomerRes.getCustomerName()).isNotEmpty();
         assertThat(saveCustomerRes.getSurname()).isEqualTo("Aghayev");
         assertThat(saveCustomerRes.getSurname()).isNotEmpty();
 
@@ -111,17 +113,17 @@ class CustomerServiceImplTest {
     @Test
     @DisplayName("Get Customers by ID")
     void givenCustomerIdThenFindCustomerThenOk() {
-        //Arrange - mocking
+        /* Arrange - mocking */
         when(customerRepository.findById(anyLong())).thenReturn(Optional.of(customer));
         when(modelMapper.map(customer,CustomerDto.class)).thenReturn(customerDto);
 
-        //Act - call real service
+        /* Act - call real service */
         CustomerDto customerRes=customerService.findById(1L);
 
-        //Assert- compare
-        assertThat(customerRes.getName()).isEqualTo("Rasim");
+        /* Assert- compare */
+        assertThat(customerRes.getCustomerName()).isEqualTo("Rasim");
 
-        //Verification
+        /* Verification */
         verify(customerRepository,times(1)).findById(anyLong());
         verify(modelMapper,times(1)).map(any(),any());
     }
@@ -133,17 +135,17 @@ class CustomerServiceImplTest {
 //        when(modelMapper.map(customer,CustomerDto.class)).thenReturn(customerDto);
 
         //Act - call real service
-//        CustomerDto customerRes=customerService.findById(1L);
+        CustomerDto customerRes=customerService.findById(1L);
 
         assertThatThrownBy(()->customerService.findById(1L))
                 .isInstanceOf(CustomerNotFound.class)
                         .hasMessage("Customer 1 does not exist.");
         //Assert- compare
-//        assertThat(customerRes.getName()).isEqualTo("Rasim");
+//        assertThat(customerRes.getCustomerName()).isEqualTo("Rasim");
 
         //Verification
         verify(customerRepository,times(1)).findById(anyLong());
-//        verify(modelMapper,times(1)).map(any(),any());
+        verify(modelMapper,times(1)).map(any(),any());
     }
 
 

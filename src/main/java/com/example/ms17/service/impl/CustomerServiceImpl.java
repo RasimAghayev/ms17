@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
     private final ModelMapper modelMapper;
-    private final CustomerMapper customerMapper;
+    private CustomerMapper customerMapper;
 
     @Override
     public CustomerDto save(CustomerDto customerDto){
@@ -58,8 +58,9 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer deleteById(long id) {
         Optional<Customer> ifExits=customerRepository.findById(id);
 //        if (!ifExits.isEmpty()) customerRepository.delete(ifExits.get());
-        if (ifExits.isPresent()) customerRepository.delete(ifExits.get());
+        ifExits.ifPresent(customerRepository::delete);
 //        ifExits.ifPresent(customerRepository::delete);
         return ifExits.get();
     }
+
 }

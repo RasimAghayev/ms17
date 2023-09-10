@@ -11,12 +11,13 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CustomerMapper {
-    CustomerMapper INSTANCE= Mappers.getMapper(CustomerMapper.class);
+    CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
 
     @InheritConfiguration
     @Mapping(source = "customerName", target = "name")
     Customer customerDtoToCustomer(CustomerDto customerDto);
 
+    //    @InheritConfiguration
     @Mapping(source = "name", target = "customerName")
     CustomerDto customerToCustomerDTO(Customer customer);
 }

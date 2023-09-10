@@ -21,7 +21,7 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Social {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO )
     long id;

@@ -1,6 +1,5 @@
 package com.example.ms17.config;
 
-import com.example.ms17.mapper.CustomerMapper;
 import com.example.ms17.model.Customer;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
