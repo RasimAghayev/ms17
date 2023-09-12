@@ -1,6 +1,7 @@
 package com.example.ms17.controller;
 
 import com.example.ms17.dto.CustomerDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,19 +10,19 @@ import com.example.ms17.service.CustomerService;
 
 import lombok.RequiredArgsConstructor;
 
-import java.util.Collections;
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/customers")
 @RequiredArgsConstructor
+@Slf4j
 public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping("")
-    public Customer save(@RequestBody Customer customer){
-        return customerService.save(customer);
+    public CustomerDto save(@RequestBody CustomerDto customerDto){
+        return customerService.save(customerDto);
     }
 
     @GetMapping("")

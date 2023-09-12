@@ -23,7 +23,8 @@ public class SocialServiceImpl implements SocialService {
 
     @Override
     public Social findById(long id){
-        return socialRepository.findById(id).get();
+        Social social = socialRepository.findById(id).get();
+        return social;
     };
     
     @Override

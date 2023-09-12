@@ -1,22 +1,21 @@
-spring:
-  datasource:
+datasource:
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
-      driver-class-name: com.mysql.cj.jdbc.Driver
+        driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${DB_CONNECTION_IP:localhost}:${DB_CONNECTION_PORT:3306}/ms17_demo3?createDatabaseIfNotExist=true
     username: ${DB_CONNECTION_USERNAME:root}
     password: ${DB_CONNECTION_USERNAME:password}
-  jpa:
+jpa:
     hibernate:
-      ddl-auto: update
+        ddl-auto: update
     open-in-view: false
     show-sql: true
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5Dialect
     properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        hibernate:
+            dialect: org.hibernate.dialect.MySQL8Dialect
 
-  liquibase:
+liquibase:
     change-log: classpath:v1/v12.yml
     enabled: false
