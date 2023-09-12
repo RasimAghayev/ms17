@@ -1,10 +1,8 @@
 FROM openjdk
+LABEL authors="raghayev"
 
-RUN echo "Hello"
-COPY ./build/libs/ms17-0.0.1-SNAPSHOT.jar /app/
+COPY ./build/libs/ms17-1.0.jar /app/
 WORKDIR /app/
 
-# test
-# test
-ENTRYPOINT [ "java" ]
-CMD [ "-jar","/app/ms17-0.0.1-SNAPSHOT.jar" ]
+ENTRYPOINT ["java"]
+CMD ["-jar","/app/ms17-1.0.jar"]
