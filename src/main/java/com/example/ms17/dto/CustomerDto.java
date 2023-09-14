@@ -4,15 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@ToString
 public class CustomerDto{
     private String customerName;
-    private String surname;
-    private String address;
-    private int branch;
-
+    private String customerSurname;
+    private String customerAddress;
+    private int customerBranch;
 }

@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -29,16 +30,19 @@ public class CustomerServiceImpl implements CustomerService {
         return customerMapper.INSTANCE.customerToCustomerDTO(customerRepository.save(customer)) ;
     };
     @Override
-    public List<Customer> findAll(){
-        return (List<Customer>) customerRepository.findAll();
+    public List<CustomerDto> findAll(){
+        return (List<CustomerDto>) customerRepository.findAll()
+                .stream()
+                .map(customer -> modelMapper.map(customerMapper.INSTANCE.customerToCustomerDTO(customer), CustomerDto.class))
+                .collect(Collectors.toList());
     }
 
     @Override
     public CustomerDto findById(long id){
         // return customerRepository.findById(id).get();
         return customerRepository.findById(id)
-        .map(customer -> modelMapper.map(customer, CustomerDto.class))
-        .orElseThrow(() -> new CustomerNotFound(id));
+                .map(customer -> modelMapper.map(customerMapper.INSTANCE.customerToCustomerDTO(customer), CustomerDto.class))
+                .orElseThrow(() -> new CustomerNotFound(id));
     };
 
 
@@ -58,9 +62,8 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer deleteById(long id) {
         Optional<Customer> ifExits=customerRepository.findById(id);
 //        if (!ifExits.isEmpty()) customerRepository.delete(ifExits.get());
-        ifExits.ifPresent(customerRepository::delete);
+        if (ifExits.isPresent()) customerRepository.delete(ifExits.get());
 //        ifExits.ifPresent(customerRepository::delete);
         return ifExits.get();
     }
-
 }

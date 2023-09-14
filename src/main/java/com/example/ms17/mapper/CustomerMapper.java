@@ -3,21 +3,28 @@ package com.example.ms17.mapper;
 
 import com.example.ms17.dto.CustomerDto;
 import com.example.ms17.model.Customer;
-import org.mapstruct.InheritConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CustomerMapper {
     CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
 
-    @InheritConfiguration
-    @Mapping(source = "customerName", target = "name")
+        @InheritConfiguration
+    @Mappings({
+            @Mapping(target="name", source="customerName"),
+            @Mapping(target="surname", source="customerSurname"),
+            @Mapping(target="address", source="customerAddress"),
+            @Mapping(target="branch", source="customerBranch")
+    })
     Customer customerDtoToCustomer(CustomerDto customerDto);
 
-    //    @InheritConfiguration
-    @Mapping(source = "name", target = "customerName")
+    @Mappings({
+            @Mapping(target="customerName", source="name"),
+            @Mapping(target="customerSurname", source="surname"),
+            @Mapping(target="customerAddress", source="address"),
+            @Mapping(target="customerBranch", source="branch")
+    })
+//    @InheritConfiguration
     CustomerDto customerToCustomerDTO(Customer customer);
 }

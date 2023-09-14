@@ -6,10 +6,11 @@ import java.util.List;
 
 public interface CustomerService {
 
+//    Customer save(Customer customer);
 
     CustomerDto save(CustomerDto customerDto);
 
-    List<Customer> findAll();
+    List<CustomerDto> findAll();
 
     CustomerDto findById(long id);
 
