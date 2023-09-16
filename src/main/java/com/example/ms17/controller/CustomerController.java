@@ -2,7 +2,9 @@ package com.example.ms17.controller;
 
 import com.example.ms17.dto.CustomerDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.ms17.model.Customer;
@@ -18,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class CustomerController {
+
     private final CustomerService customerService;
 
     @PostMapping("")
@@ -29,6 +32,7 @@ public class CustomerController {
     public List<CustomerDto> findAll(){
         return customerService.findAll();
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<CustomerDto> findById(@PathVariable long id){
         return ResponseEntity.ok(customerService.findById(id));
@@ -43,4 +47,5 @@ public class CustomerController {
     public Customer deleteById(@PathVariable long id){
         return customerService.deleteById(id);
     }
+
 }

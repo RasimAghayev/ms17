@@ -1,30 +1,28 @@
 package com.example.ms17.controller;
 
-import com.example.ms17.dto.CustomerDto;
-import com.example.ms17.model.Customer;
-import com.example.ms17.service.CustomerService;
+import com.example.ms17.dto.PatientDto;
+import com.example.ms17.model.onetone.Patient;
+import com.example.ms17.service.PatientService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.http.MediaType.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -32,46 +30,40 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class CustomerControllerTest {
+class PatientControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private CustomerService customerService;
+    private PatientService patientService;
 
     @MockBean
     private ModelMapper modelMapper;
-    private Customer customer;
-    private CustomerDto customerDto;
-    private final List<Customer> customers = new ArrayList<>();
+    private Patient patient;
+    private PatientDto patientDto;
+    private final List<Patient> patients = new ArrayList<>();
     private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
-        customerDto= CustomerDto
+        patientDto= PatientDto
                 .builder()
-                .customerName("Rasim")
-                .surname("Aghayev")
-                .address("Baki")
-                .branch(15)
+                .patientMnemonic("Rasim")
+                .patientSurname("Aghayev")
                 .build();
-        Customer customer1 = Customer
+        Patient patient1 = Patient
                 .builder()
-                .name("Rasim1")
+                .mnemonic("Rasim1")
                 .surname("Aghayev1")
-                .address("Baki1")
-                .branch(151)
                 .build();
-        Customer customer2 = Customer
+        Patient patient2 = Patient
                 .builder()
-                .name("Rasim2")
+                .mnemonic("Rasim2")
                 .surname("Aghayev2")
-                .address("Baki2")
-                .branch(152)
                 .build();
-        customers.add(customer1);
-        customers.add(customer2);
+        patients.add(patient1);
+        patients.add(patient2);
     }
 
     @AfterEach
@@ -87,60 +79,56 @@ class CustomerControllerTest {
     }
 
     @Test
-    @DisplayName("Save Customers Controller")
-    void givenCustomerThenSaveThenOk() throws Exception {
+    @DisplayName("Save Patients Controller")
+    void givenPatientThenSaveThenOk() throws Exception {
         //Arrange - mocking
-        when(customerService.save(customerDto)).thenReturn(customerDto);
+        when(patientService.save(patientDto)).thenReturn(patientDto);
 
         String expectedJson = new ObjectMapper()
-                .writeValueAsString(customerDto);
+                .writeValueAsString(patientDto);
 
         //Act - call real service
         mockMvc.perform(
-                        post("/customers")
+                        post("/patients")
                                 .content(expectedJson)
                                 .accept(APPLICATION_JSON)
                                 .contentType(APPLICATION_JSON)
                 )
                 .andExpect(status().isOk())
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.customerName").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.surname").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.address").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.branch").exists());
+                .andExpect(MockMvcResultMatchers.jsonPath("$.patientName").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.surname").exists());
 
         //Assert- compare
 
         //Verification
-        verify(customerService,times(1)).save(customerDto);
+        verify(patientService,times(1)).save(patientDto);
     }
     ///https://github.com/lokeshgupta1981/SpringExamples/blob/master/unit-testing/src/test/java/com/howtodoinjava/rest/RestTemplatePostApiExamples.java
 
     @Test
-    @DisplayName("Get Customers by ID")
-    void givenIdThenFindCustomerThenOk() throws Exception {
+    @DisplayName("Get Patients by ID")
+    void givenIdThenFindPatientThenOk() throws Exception {
         //Arrange - mocking
-        when(customerService.findById(anyLong())).thenReturn(customerDto);
+        when(patientService.findById(anyLong())).thenReturn(patientDto);
 
         //Act - call real service
         mockMvc.perform(
-                        get("/customers/{id}",1L)
+                        get("/patients/{id}",1L)
                                 .accept(APPLICATION_JSON)
                                 .contentType(APPLICATION_JSON)
                 )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.customerName").value("Rasim"))
+                .andExpect(jsonPath("$.patientName").value("Rasim"))
                 .andExpect(jsonPath("$.surname").value("Aghayev"))
-                .andExpect(jsonPath("$.address").value("Baki"))
-                .andExpect(jsonPath("$.branch").value(15))
                 .andDo(print())
         ;
 
         //Assert- compare
 
         //Verification
-        verify(customerService,times(1)).findById(anyLong());
+        verify(patientService,times(1)).findById(anyLong());
     }
 
     //    @Test

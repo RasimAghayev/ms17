@@ -1,0 +1,6 @@
+Object types of References in Java
+1. Strong - Biz null etdikde GB silinir
+2. Weak - WeakReference yaradiriq null edirik lazim olanda yeniden caqira bilirk GB caqrildiqda yer tutur
+3. Soft - SoftReference yaradiriq o vaxt null olur ki, GB yer limit yaxinlasanda
+4. Phantom - ReferenceQueue -> PhantomReference queue yaradiriq ora elave edirik null etdikden sorna caqrilanda queue caqrilir.
+

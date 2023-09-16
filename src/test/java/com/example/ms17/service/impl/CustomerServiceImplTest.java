@@ -36,13 +36,20 @@ class CustomerServiceImplTest {
     private CustomerServiceImpl customerService;
     private Customer customer;
     private CustomerDto customerDto;
-    private List<Customer> customers = new ArrayList<>();
+    private final List<Customer> customers = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
         customer= Customer
                 .builder()
                 .name("Rasim")
+                .surname("Aghayev")
+                .address("Baki")
+                .branch(15)
+                .build();
+        customerDto= CustomerDto
+                .builder()
+                .customerName("Rasim")
                 .surname("Aghayev")
                 .address("Baki")
                 .branch(15)
@@ -67,10 +74,7 @@ class CustomerServiceImplTest {
 
     @AfterEach
     void tearDown() {
-        customerDto=null;
-        Customer customer1=null;
-        Customer customer2=null;
-        customers=null;
+        customer=null;
     }
 
     @Test
@@ -113,17 +117,17 @@ class CustomerServiceImplTest {
     @Test
     @DisplayName("Get Customers by ID")
     void givenCustomerIdThenFindCustomerThenOk() {
-        /* Arrange - mocking */
+        //Arrange - mocking
         when(customerRepository.findById(anyLong())).thenReturn(Optional.of(customer));
         when(modelMapper.map(customer,CustomerDto.class)).thenReturn(customerDto);
 
-        /* Act - call real service */
+        //Act - call real service
         CustomerDto customerRes=customerService.findById(1L);
 
-        /* Assert- compare */
+        //Assert- compare
         assertThat(customerRes.getCustomerName()).isEqualTo("Rasim");
 
-        /* Verification */
+        //Verification
         verify(customerRepository,times(1)).findById(anyLong());
         verify(modelMapper,times(1)).map(any(),any());
     }
@@ -135,17 +139,17 @@ class CustomerServiceImplTest {
 //        when(modelMapper.map(customer,CustomerDto.class)).thenReturn(customerDto);
 
         //Act - call real service
-        CustomerDto customerRes=customerService.findById(1L);
+//        CustomerDto customerRes=customerService.findById(1L);
 
         assertThatThrownBy(()->customerService.findById(1L))
                 .isInstanceOf(CustomerNotFound.class)
-                        .hasMessage("Customer 1 does not exist.");
+                .hasMessage("Customer 1 does not exist.");
         //Assert- compare
-//        assertThat(customerRes.getCustomerName()).isEqualTo("Rasim");
+//        assertThat(customerRes.getName()).isEqualTo("Rasim");
 
         //Verification
         verify(customerRepository,times(1)).findById(anyLong());
-        verify(modelMapper,times(1)).map(any(),any());
+//        verify(modelMapper,times(1)).map(any(),any());
     }
 
 

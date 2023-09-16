@@ -1,6 +1,7 @@
 package com.example.ms17.config;
 
 import com.example.ms17.model.Customer;
+import com.example.ms17.model.onetone.Patient;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -18,6 +19,8 @@ public class Config {
 
     @Bean
     public Customer customer() { return new Customer();}
+    @Bean
+    public Patient patient() { return new Patient();}
 
     @Bean
     public ModelMapper modelMapper(){
