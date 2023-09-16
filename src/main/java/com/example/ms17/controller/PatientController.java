@@ -24,7 +24,7 @@ public class PatientController {
     }
 
     @GetMapping("")
-    public List<Patient> findAll(){
+    public List<PatientDto> findAll(){
         return patientService.findAll();
     }
 
@@ -34,8 +34,8 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public Patient edit(@PathVariable long id,@RequestBody Patient patient){
-        return patientService.edit(id, patient);
+    public PatientDto edit(@PathVariable long id,@RequestBody PatientDto patientDto){
+        return patientService.edit(id, patientDto);
     }
 
     @DeleteMapping("/{id}")

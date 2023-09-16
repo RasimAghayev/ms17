@@ -1,5 +1,6 @@
 package com.example.ms17.repository;
 
+import com.example.ms17.dto.PatientDto;
 import com.example.ms17.model.onetone.Patient;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

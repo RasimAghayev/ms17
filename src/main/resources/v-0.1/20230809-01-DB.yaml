@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Liquibase
+      changes:
+        - createTable:
+            tableName: test_table
+            columns:
+              - column:
+                  name: test_column
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey:  true
+                    primaryKeyName: PK_BREEDS
+                    nullable:  false

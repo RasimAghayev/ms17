@@ -10,13 +10,13 @@ import org.mapstruct.factory.Mappers;
 public interface CustomerMapper {
     CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
 
-        @InheritConfiguration
     @Mappings({
             @Mapping(target="name", source="customerName"),
             @Mapping(target="surname", source="customerSurname"),
             @Mapping(target="address", source="customerAddress"),
             @Mapping(target="branch", source="customerBranch")
     })
+        @InheritConfiguration
     Customer customerDtoToCustomer(CustomerDto customerDto);
 
     @Mappings({
@@ -25,6 +25,5 @@ public interface CustomerMapper {
             @Mapping(target="customerAddress", source="address"),
             @Mapping(target="customerBranch", source="branch")
     })
-//    @InheritConfiguration
     CustomerDto customerToCustomerDTO(Customer customer);
 }

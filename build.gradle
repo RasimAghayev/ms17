@@ -1,8 +1,8 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.1.0'
-	id 'io.spring.dependency-management' version '1.1.0'
-	id 'com.adarshr.test-logger' version '3.2.0'
+    id 'java'
+    id 'org.springframework.boot' version '3.1.0'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'com.adarshr.test-logger' version '3.2.0'
 }
 
 group = 'com.example'
@@ -10,93 +10,91 @@ version = '1.0'
 sourceCompatibility = '17'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 test {
-	testLogging.showStandardStreams = true
+    testLogging.showStandardStreams = true
 }
 testlogger {
-	// pick a theme - mocha, standard, plain, mocha-parallel, standard-parallel or plain-parallel
-	theme 'standard'
+    // pick a theme - mocha, standard, plain, mocha-parallel, standard-parallel or plain-parallel
+    theme 'standard'
 
-	// set to false to disable detailed failure logs
-	showExceptions true
+    // set to false to disable detailed failure logs
+    showExceptions true
 
-	// set to false to hide stack traces
-	showStackTraces true
+    // set to false to hide stack traces
+    showStackTraces true
 
-	// set to true to remove any filtering applied to stack traces
-	showFullStackTraces false
+    // set to true to remove any filtering applied to stack traces
+    showFullStackTraces false
 
-	// set to false to hide exception causes
-	showCauses true
+    // set to false to hide exception causes
+    showCauses true
 
-	// set threshold in milliseconds to highlight slow tests
-	slowThreshold 2000
+    // set threshold in milliseconds to highlight slow tests
+    slowThreshold 2000
 
-	// displays a breakdown of passes, failures and skips along with total duration
-	showSummary true
+    // displays a breakdown of passes, failures and skips along with total duration
+    showSummary true
 
-	// set to true to see simple class names
-	showSimpleNames false
+    // set to true to see simple class names
+    showSimpleNames false
 
-	// set to false to hide passed tests
-	showPassed true
+    // set to false to hide passed tests
+    showPassed true
 
-	// set to false to hide skipped tests
-	showSkipped true
+    // set to false to hide skipped tests
+    showSkipped true
 
-	// set to false to hide failed tests
-	showFailed true
+    // set to false to hide failed tests
+    showFailed true
 
-	// enable to see standard out and error streams inline with the test results
-	showStandardStreams false
+    // enable to see standard out and error streams inline with the test results
+    showStandardStreams false
 
-	// set to false to hide passed standard out and error streams
-	showPassedStandardStreams true
+    // set to false to hide passed standard out and error streams
+    showPassedStandardStreams true
 
-	// set to false to hide skipped standard out and error streams
-	showSkippedStandardStreams true
+    // set to false to hide skipped standard out and error streams
+    showSkippedStandardStreams true
 
-	// set to false to hide failed standard out and error streams
-	showFailedStandardStreams true
+    // set to false to hide failed standard out and error streams
+    showFailedStandardStreams true
 }
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web:3.1.0'
-	implementation 'org.springframework.boot:spring-boot-starter-validation:3.0.4'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.0.4'
-//	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4'
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-api:2.0.4'
-	implementation group: 'org.modelmapper',name: 'modelmapper',version:'3.1.1'
-//	implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.5.Final'
-	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
-	compileOnly 'org.projectlombok:lombok:1.18.26'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-api:2.0.4'
+    compileOnly 'org.projectlombok:lombok'
 
-	//Database
-//	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
-	runtimeOnly 'com.mysql:mysql-connect-java'
-//	runtimeOnly 'com.mysql:mysql-connector-j'
+    compileOnly 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    implementation group: 'org.modelmapper',name: 'modelmapper',version:'3.1.1'
+
+    //Database
+    runtimeOnly 'com.mysql:mysql-connector-j'
 //	runtimeOnly 'com.h2database:h2'
 
-	developmentOnly 'org.springframework.boot:spring-boot-devtools:3.0.4'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:3.0.4'
-	annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
 //	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	testImplementation group: 'junit', name: 'junit', version: '4.13.2'
-	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.4.0'
-	testImplementation('org.springframework.boot:spring-boot-starter-test:3.1.0'){
-		exclude group:'org.junit.vintage', module: "junit-vintage-engine"
-	}
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.4.0'
+    testImplementation('org.springframework.boot:spring-boot-starter-test'){
+        exclude group:'org.junit.vintage', module: "junit-vintage-engine"
+    }
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }

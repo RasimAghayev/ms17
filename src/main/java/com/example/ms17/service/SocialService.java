@@ -6,9 +6,9 @@ import java.util.List;
 public interface SocialService {
 
     Social save(Social social);
-    
+
     Social findById(long id);
-    
+
     List<Social> findByAll();
 
 }

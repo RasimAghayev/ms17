@@ -1,7 +1,5 @@
-package com.example.ms17.model.onetone;
+package com.example.ms17.model.onetomany;
 
-import com.example.ms17.dto.PatientDetailDto;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -11,16 +9,15 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "patient_details")
+@Table(name = "client_orders")
 @Entity
 @NoArgsConstructor
-@ToString
-public class PatientDetail {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String orderNumber;
-    @OneToOne
-    @JsonBackReference
-    Patient  patient;
+    @ManyToOne
+    @JoinColumn(name = "client_id",referencedColumnName = "id")
+    Client client;
 }

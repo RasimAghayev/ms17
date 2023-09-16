@@ -1,9 +1,12 @@
 package com.example.ms17.model.onetone;
 
+import com.example.ms17.dto.PatientDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +22,7 @@ import lombok.experimental.FieldDefaults;
 //        name = "PatientDetail.customer",
 //        attributeNodes = @NamedAttributeNode("client")
 //)
-public class Patient {
+public class Patient extends PatientDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
@@ -27,5 +30,5 @@ public class Patient {
     String surname;
     @OneToOne (cascade = CascadeType.ALL,mappedBy = "patient")
     @JoinColumn(name = "patient_id",referencedColumnName = "id")
-    PatientDetail patientDetails;
+    PatientDetail patientDetail;
 }

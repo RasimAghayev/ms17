@@ -1,14 +1,14 @@
 spring:
-    profiles:
-        active: local
-        include:
-            - common
-            - db
-            - security
-            - logging
+  profiles:
+    active: local
+    include:
+      - common
+      - db
+      - security
+      - logging
 
 has:
-    account: test
+  account: test
 #server:
 #  servlet:
 #    context-path: api/v1/ms17-svc/

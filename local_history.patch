@@ -1,0 +1,26 @@
+Index: src/main/resources/application-db.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/application-db.yml b/src/main/resources/application-db.yml
+--- a/src/main/resources/application-db.yml	
++++ b/src/main/resources/application-db.yml	(date 1690546077905)
+@@ -1,17 +1,5 @@
+ spring:
+-  datasource:
+-    url=jdbc:h2:mem:testdb
+-    driverClassName=org.h2.Driver
+-    username=sa
+-    password=password
+-#  datasource:
+-#    type: com.zaxxer.hikari.HikariDataSource
+-#    driverClassName: com.mysql.cj.
+   jpa:
+-    database-platform=org:
+-      hibernate:
+-        dialect:
+-          H2Dialect:
+     hibernate:
+       ddl-auto: update
+     open-in-view: false

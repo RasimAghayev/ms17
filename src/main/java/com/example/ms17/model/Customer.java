@@ -23,7 +23,6 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO )
     long id;
-
     String name;
     String surname;
     String address;

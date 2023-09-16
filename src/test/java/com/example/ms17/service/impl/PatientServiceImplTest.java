@@ -96,7 +96,7 @@ class PatientServiceImplTest {
         when(patientRepository.findAll()).thenReturn(patients);
 
         //Act - call real service
-        List<Patient> patientsRes=patientService.findAll();
+        List<PatientDto> patientsRes=patientService.findAll();
 
         //Assert- compare
         assertThat(patientsRes).isNotNull();

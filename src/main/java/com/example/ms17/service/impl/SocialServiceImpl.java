@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class SocialServiceImpl implements SocialService {
 
     private final SocialRepository socialRepository;
-    
+
     @Override
     public Social save(Social social){
         return socialRepository.save(social);
@@ -23,10 +23,9 @@ public class SocialServiceImpl implements SocialService {
 
     @Override
     public Social findById(long id){
-        Social social = socialRepository.findById(id).get();
-        return social;
+        return socialRepository.findById(id).get();
     };
-    
+
     @Override
     public List<Social> findByAll(){
         return null;
