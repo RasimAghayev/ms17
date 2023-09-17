@@ -10,20 +10,19 @@ import org.mapstruct.factory.Mappers;
 public interface PatientMapper {
     PatientMapper INSTANCE = Mappers.getMapper(PatientMapper.class);
 
-//    @Mappings({
-//            @Mapping(target="mnemonic", source="patientMnemonic"),
-//            @Mapping(target="surname", source="patientSurname"),
-//            @Mapping(target="patientDetail", source="patientDetailDto")
-//    })
-//    @InheritConfiguration
+    @Mappings({
+            @Mapping(target = "mnemonic", source = "patientMnemonic"),
+            @Mapping(target = "surname", source = "patientSurname"),
+            @Mapping(target = "patientDetail", source = "patientDetail")
+    })
+    @InheritConfiguration
     Patient patientDtoToPatient(PatientDto patientDto);
 
-//    @Mappings({
-//            @Mapping(target="patientMnemonic", source="mnemonic"),
-//            @Mapping(target="patientSurname", source="surname"),
-//            @Mapping(target="patientDetailDto", source="patientDetail")
-//    })
-
+    @Mappings({
+            @Mapping(target = "patientMnemonic", source = "mnemonic"),
+            @Mapping(target = "patientSurname", source = "surname"),
+            @Mapping(target = "patientDetail", source = "patientDetail")
+    })
     PatientDto patientToPatientDTO(Patient patient);
 
 }

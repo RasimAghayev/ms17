@@ -8,7 +8,7 @@ spring:
     password: ${DB_CONNECTION_USERNAME:password}
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     open-in-view: false
     show-sql: true
     database: mysql

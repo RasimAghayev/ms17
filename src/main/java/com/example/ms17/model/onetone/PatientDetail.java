@@ -15,12 +15,12 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @NoArgsConstructor
 @ToString
-public class PatientDetail {
+public class PatientDetail extends PatientDetailDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String orderNumber;
     @OneToOne
     @JsonBackReference
-    Patient  patient;
+    Patient patient;
 }
