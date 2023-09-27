@@ -9,11 +9,13 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "client")
 @Entity
-@NoArgsConstructor
+//@Data
+//@ToString
 //@EqualsAndHashCode
 //@NamedEntityGraph(
 //        name = "PatientDetail.customer",
@@ -25,8 +27,7 @@ public class Client {
     long id;
     String name;
     String surname;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "client",fetch = FetchType.LAZY)
-    List<Order> orders;
-
-
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    /* @JoinColumn(name = "client_id", referencedColumnName = "id") */
+            List<Order> orders;
 }
