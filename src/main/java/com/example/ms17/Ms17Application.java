@@ -1,11 +1,7 @@
 package com.example.ms17;
 
-import com.example.ms17.model.Customer;
-import com.example.ms17.model.onetone.Patient;
-import com.example.ms17.model.onetone.PatientDetail;
 import com.example.ms17.repository.CustomerRepository;
 import com.example.ms17.repository.PatientRepository;
-//import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,20 +13,21 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Slf4j
 @RequiredArgsConstructor
 public class Ms17Application implements CommandLineRunner {
+    @Value("${has.account}")
+    static String hasAccount;
     private final CustomerRepository customerRepository;
     private final PatientRepository patientRepository;
 //    private final EntityManagerFactory emf;
 
-    @Value("${has.account}")
-    static String hasAccount;
-    public static void main(String[] args)  throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
         SpringApplication.run(Ms17Application.class, args);
 //        log.info("Application is starting!");
 //
 //        log.warn(hasAccount);
     }
+
     @Override
-    public void run(String... args) throws Exception{
+    public void run(String... args) throws Exception {
 //        Customer customer=new Customer();
 //        customer.setName("Test");
 //        customer.setAddress("Branch Address");
@@ -79,7 +76,6 @@ public class Ms17Application implements CommandLineRunner {
 //                .forEach(System.out::println);
 //        patientRepository.findAllNativeQueryQuetsion("Test");
 //        patientRepository.findAllNativeQueryParam("Test");
-
 
 
     }

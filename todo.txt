@@ -1,3 +1,8 @@
+Codding flow
+1. Model Class
+2. Repository
+3.
+
 Object types of References in Java
 1. Strong - Biz null etdikde GB silinir
 2. Weak - WeakReference yaradiriq null edirik lazim olanda yeniden caqira bilirk GB caqrildiqda yer tutur

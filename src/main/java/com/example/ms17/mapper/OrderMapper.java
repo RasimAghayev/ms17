@@ -13,15 +13,15 @@ public interface OrderMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
     //    @Mappings({
-//            @Mapping(target = "name", source = "clientName"),
+//            @Mapping(target = "id", source = "client_id"),
     @Mapping(target = "orderNumber", source = "orderNumber")
 //    })
 //    @InheritConfiguration
     Order orderDtoToOrder(OrderDto orderDto);
 
     //    @Mappings({
-//            @Mapping(target = "clientName", source = "name"),
+//            @Mapping(target = "id", source = "client_id"),
     @Mapping(target = "orderNumber", source = "orderNumber")
 //    })
-    OrderDto orderToOrderDTO(Order order);
+    OrderDto orderToOrderDTO(Order client);
 }

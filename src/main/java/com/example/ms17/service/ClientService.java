@@ -13,6 +13,8 @@ public interface ClientService {
 
     List<ClientDto> findAll();
 
+//    List<ClientDto> findAlls();
+
     ClientDto findById(long id);
 
 

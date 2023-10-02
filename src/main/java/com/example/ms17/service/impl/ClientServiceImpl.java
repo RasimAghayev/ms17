@@ -3,6 +3,7 @@ package com.example.ms17.service.impl;
 import com.example.ms17.dto.ClientDto;
 import com.example.ms17.exception.ClientNotFound;
 import com.example.ms17.mapper.ClientMapper;
+import com.example.ms17.mapper.OrderMapper;
 import com.example.ms17.model.onetomany.Client;
 import com.example.ms17.repository.ClientRepository;
 import com.example.ms17.service.ClientService;
@@ -21,6 +22,7 @@ public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
     private final ModelMapper modelMapper;
     private ClientMapper clientMapper;
+    private OrderMapper orderMapper;
 
     @Override
     public ClientDto save(ClientDto clientDto) {
@@ -33,12 +35,17 @@ public class ClientServiceImpl implements ClientService {
 //        return clientRepository.save(client);
 
         Client client = clientMapper.INSTANCE.clientDtoToClient(clientDto);
-//        List<Order> order = client.getOrders();
-//        order.set(client.getOrders());
-//        order.set(client);
-        return clientMapper.INSTANCE.clientToClientDTO(clientRepository.save(client));
+//        Order order = clientDto.getOrders();
+//        List<Order> order = (List<Order>) orderMapper.INSTANCE.orderDtoToOrder(orderDto);
+//        List<Order> order = Collections.singletonList(orderMapper.INSTANCE.orderDtoToOrder(orderDto));
+//        orders.set(orders);
+//        client.setOrders(order);
+//        order.set(clientDto);
+        clientRepository.save(client);
+        return clientMapper.INSTANCE.clientToClientDTO(client);
 //        return clientMapper.INSTANCE.clientToClientDTO(client) ;
 //        return client;
+//        return order;
 //        return clientDto;
     }
 
@@ -50,11 +57,19 @@ public class ClientServiceImpl implements ClientService {
                 .collect(Collectors.toList());
     }
 
+//    @Override
+//    public List<ClientDto> findAlls() {
+//        return clientRepository.findAlls()
+//                .stream()
+//                .map(client -> modelMapper.map(clientMapper.INSTANCE.clientToClientDTO(client), ClientDto.class))
+//                .collect(Collectors.toList());
+//    }
+
     @Override
     public ClientDto findById(long id) {
         // return clientRepository.findById(id).get();
         return clientRepository.findById(id)
-                .map(client -> modelMapper.map(client, ClientDto.class))
+                .map(client -> modelMapper.map(clientMapper.INSTANCE.clientToClientDTO(client), ClientDto.class))
                 .orElseThrow(() -> new ClientNotFound(id));
     }
 

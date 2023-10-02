@@ -12,14 +12,16 @@ public interface ClientMapper {
 
     @Mappings({
             @Mapping(target = "name", source = "clientName"),
-            @Mapping(target = "surname", source = "clientSurname")
+            @Mapping(target = "surname", source = "clientSurname"),
+            @Mapping(target = "orders", source = "orders")
     })
     @InheritConfiguration
     Client clientDtoToClient(ClientDto clientDto);
 
     @Mappings({
             @Mapping(target = "clientName", source = "name"),
-            @Mapping(target = "clientSurname", source = "surname")
+            @Mapping(target = "clientSurname", source = "surname"),
+            @Mapping(target = "orders", source = "orders")
     })
     ClientDto clientToClientDTO(Client client);
 }
