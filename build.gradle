@@ -91,7 +91,7 @@ dependencies {
 
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.6.0'
-    testImplementation('org.springframework.boot:spring-boot-starter-test:3.1.0') {
+    testImplementation('org.springframework.boot:spring-boot-starter-test:3.1.4') {
         exclude group: 'org.junit.vintage', module: "junit-vintage-engine"
     }
 }
