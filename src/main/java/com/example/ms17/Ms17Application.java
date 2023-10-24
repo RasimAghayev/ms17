@@ -1,7 +1,8 @@
 package com.example.ms17;
 
-import com.example.ms17.repository.CustomerRepository;
-import com.example.ms17.repository.PatientRepository;
+import com.example.ms17.model.Account;
+import com.example.ms17.repository.AccountRepository;
+import com.example.ms17.service.TransferService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,14 +10,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.math.BigDecimal;
+
 @SpringBootApplication
 @Slf4j
 @RequiredArgsConstructor
 public class Ms17Application implements CommandLineRunner {
     @Value("${has.account}")
     static String hasAccount;
-    private final CustomerRepository customerRepository;
-    private final PatientRepository patientRepository;
+    //    private final CustomerRepository customerRepository;
+//    private final PatientRepository patientRepository;
+    private final AccountRepository accountRepository;
+    private final TransferService transferService;
 //    private final EntityManagerFactory emf;
 
     public static void main(String[] args) throws InterruptedException {
@@ -76,7 +81,20 @@ public class Ms17Application implements CommandLineRunner {
 //                .forEach(System.out::println);
 //        patientRepository.findAllNativeQueryQuetsion("Test");
 //        patientRepository.findAllNativeQueryParam("Test");
+        int min = 50; // Minimum value of range
+        int max = 100; // Maximum value of range
+        int random_int = (int) Math.floor(Math.random() * (max - min + 1) + min);
+        Account a1 = new Account();
+        a1.setAccount("RasimA" + random_int);
+        a1.setAmount(BigDecimal.valueOf(500));
+        accountRepository.save(a1);
+        Account a2 = new Account();
+        a2.setAccount("RasimA" + (random_int * random_int));
+        a2.setAmount(BigDecimal.valueOf(500));
+        accountRepository.save(a2);
 
+
+        transferService.doTransfer(BigDecimal.valueOf(125));
 
     }
 
